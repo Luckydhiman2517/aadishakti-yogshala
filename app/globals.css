@@ -1,26 +1,184 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-cormorant), ui-serif, Georgia, serif;
+  --font-sans: var(--font-jost), ui-sans-serif, system-ui, sans-serif;
+  --font-deva: var(--font-tiro), var(--font-cormorant), serif;
+
+  /* Cosmic devotional palette, drawn from the Shiva–Shakti mural */
+  --color-night: #07040e;
+  --color-night-2: #0d0719;
+  --color-plum: #190f31;
+  --color-plum-2: #241544;
+  --color-saffron: #ff9b2f;
+  --color-marigold: #ffc247;
+  --color-lotus: #ff6fa5;
+  --color-violet: #8b5cf6;
+  --color-cream: #fff7ec;
+  --color-sand: #efe3d2;
+  --color-sage: #7ee0c9;
+
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-marquee-rev: marquee-rev 40s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-slow: float 11s ease-in-out infinite;
+  --animate-kenburns: kenburns 28s ease-in-out infinite alternate;
+  --animate-spin-slow: spin 30s linear infinite;
+  --animate-spin-slower: spin 60s linear infinite reverse;
+  --animate-glow: glow 6s ease-in-out infinite;
+  --animate-shimmer: shimmer 3.5s linear infinite;
+  --animate-rise: rise 14s linear infinite;
+  --animate-breathe: breathe 8s ease-in-out infinite;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+@keyframes marquee-rev {
+  from { transform: translate3d(-50%, 0, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-18px) rotate(3deg); }
+}
+@keyframes kenburns {
+  from { transform: scale(1) translate3d(0, 0, 0); }
+  to { transform: scale(1.14) translate3d(1.5%, -1.5%, 0); }
+}
+@keyframes glow {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50% { opacity: 0.75; transform: scale(1.12); }
+}
+@keyframes shimmer {
+  from { background-position: -220% 0; }
+  to { background-position: 220% 0; }
+}
+@keyframes rise {
+  0% { transform: translateY(0) scale(1); opacity: 0; }
+  12% { opacity: 0.8; }
+  85% { opacity: 0.5; }
+  100% { transform: translateY(-78vh) scale(1.5); opacity: 0; }
+}
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.3); opacity: 0.9; }
+}
+
+:root {
+  --background: var(--color-night);
+  --foreground: var(--color-cream);
+}
+
+@layer base {
+  * {
+    border-color: color-mix(in oklab, var(--color-cream) 10%, transparent);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--color-night);
+    color: var(--color-cream);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+    font-synthesis-weight: none;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 300;
+    letter-spacing: -0.015em;
+  }
+
+  ::selection {
+    background: var(--color-saffron);
+    color: var(--color-night);
+  }
+
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: var(--color-night); }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(var(--color-saffron), var(--color-lotus));
+    border-radius: 99px;
+    border: 2px solid var(--color-night);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@utility container-x {
+  width: 100%;
+  margin-inline: auto;
+  max-width: 80rem;
+  padding-inline: 1rem;
+  @media (width >= 48rem) { padding-inline: 2rem; }
+  @media (width >= 80rem) { padding-inline: 2.5rem; }
+}
+
+/* Warm gradient text used for emphasis in headings */
+@utility text-aura {
+  background-image: linear-gradient(100deg, var(--color-marigold), var(--color-lotus) 55%, var(--color-violet));
+  background-clip: text;
+  color: transparent;
+}
+
+@utility glass {
+  background: color-mix(in oklab, var(--color-plum) 55%, transparent);
+  backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid color-mix(in oklab, var(--color-cream) 12%, transparent);
+}
+
+/* Animated conic border for featured cards */
+@utility ring-aura {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: conic-gradient(from var(--aura-angle, 0deg), var(--color-saffron), var(--color-lotus), var(--color-violet), var(--color-saffron));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+}
+
+@property --aura-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.aura-spin::before {
+  animation: aura-rotate 6s linear infinite;
+}
+@keyframes aura-rotate {
+  to { --aura-angle: 360deg; }
+}
+
+/* Grain overlay to keep large dark gradients from banding */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
