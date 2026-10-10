@@ -1,31 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Jost, Tiro_Devanagari_Hindi } from "next/font/google";
 import "./globals.css";
 import { SITE } from "@/lib/data";
 import Navbar from "@/components/site/Navbar";
 import Footer from "@/components/site/Footer";
 import ScrollProgress from "@/components/site/ScrollProgress";
-
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  display: "swap",
-});
-
-const jost = Jost({
-  variable: "--font-jost",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  display: "swap",
-});
-
-const tiro = Tiro_Devanagari_Hindi({
-  variable: "--font-tiro",
-  subsets: ["devanagari", "latin"],
-  weight: ["400"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://aadishaktiyogshaala.com"),
@@ -71,10 +49,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${cormorant.variable} ${jost.variable} ${tiro.variable} h-full antialiased`}
-    >
+    <html lang="en" className="h-full antialiased">
+      <head>
+        {/* The two faces used above the fold; the rest load on demand. */}
+        <link
+          rel="preload"
+          href="/fonts/cormorant-garamond-latin.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/jost-latin.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className="bg-night text-cream min-h-full">
         <ScrollProgress />
         <Navbar />

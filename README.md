@@ -64,7 +64,11 @@ WhatsApp.
 - Dark cosmic palette derived from the hero mural; tokens are defined in
   `app/globals.css` under `@theme`.
 - Type is Cormorant Garamond (display), Jost (body) and Tiro Devanagari Hindi
-  for the Sanskrit lines.
+  for the Sanskrit lines. The fonts are **self-hosted** from `public/fonts/`
+  and declared in `app/fonts.css` — deliberately not `next/font/google`, which
+  downloads at build time and fails on any host that cannot reach
+  fonts.googleapis.com (this broke the Vercel build). The build now needs no
+  network at all.
 - Every animation is suppressed under `prefers-reduced-motion`.
 - Placeholder details to change before launch: phone number, email, street
   address and the social links in `SITE`.

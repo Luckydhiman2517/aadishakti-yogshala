@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./fonts.css";
 
 @theme inline {
   --font-display: var(--font-cormorant), ui-serif, Georgia, serif;
@@ -67,6 +68,12 @@
 }
 
 :root {
+  /* Font families, self-hosted in app/fonts.css. @theme above maps these
+     onto the font-display / font-sans / font-deva utilities. */
+  --font-cormorant: "Cormorant Garamond";
+  --font-jost: "Jost";
+  --font-tiro: "Tiro Devanagari Hindi";
+
   --background: var(--color-night);
   --foreground: var(--color-cream);
 }
