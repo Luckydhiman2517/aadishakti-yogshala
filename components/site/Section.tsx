@@ -6,11 +6,14 @@ export default function Section({
   id,
   className = "",
   glow,
+  pad = true,
 }: {
   children: ReactNode;
   id?: string;
   className?: string;
   glow?: "saffron" | "lotus" | "violet" | "none";
+  /** Set false to supply your own vertical padding through `className`. */
+  pad?: boolean;
 }) {
   const glowTint = {
     saffron: "bg-saffron/10",
@@ -20,7 +23,10 @@ export default function Section({
   }[glow ?? "none"];
 
   return (
-    <section id={id} className={`relative overflow-hidden py-24 lg:py-32 ${className}`}>
+    <section
+      id={id}
+      className={`relative overflow-hidden ${pad ? "py-24 lg:py-32" : ""} ${className}`}
+    >
       {glow && glow !== "none" && (
         <div
           aria-hidden

@@ -7,6 +7,7 @@ export default function SectionHeading({
   accent,
   body,
   align = "center",
+  level = 2,
 }: {
   kicker?: string;
   deva?: string;
@@ -14,8 +15,11 @@ export default function SectionHeading({
   accent?: string;
   body?: string;
   align?: "center" | "left";
+  /** Use 1 when this is the page's leading heading. */
+  level?: 1 | 2;
 }) {
   const centered = align === "center";
+  const Heading = level === 1 ? "h1" : "h2";
 
   return (
     <div className={centered ? "mx-auto max-w-2xl text-center" : "max-w-2xl"}>
@@ -38,7 +42,7 @@ export default function SectionHeading({
         </Reveal>
       )}
       <Reveal delay={0.1}>
-        <h2 className="font-display mt-3 text-4xl leading-[1.08] sm:text-5xl lg:text-[3.4rem]">
+        <Heading className="font-display mt-3 text-4xl leading-[1.08] sm:text-5xl lg:text-[3.4rem]">
           {title}
           {accent && (
             <>
@@ -46,7 +50,7 @@ export default function SectionHeading({
               <em className="text-aura not-italic">{accent}</em>
             </>
           )}
-        </h2>
+        </Heading>
       </Reveal>
       {body && (
         <Reveal delay={0.16}>

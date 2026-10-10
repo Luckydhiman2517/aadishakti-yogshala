@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 import { Mail, MapPin, Phone, Clock, MessageCircle } from "lucide-react";
-import PageHero from "@/components/site/PageHero";
 import Section from "@/components/site/Section";
 import SectionHeading from "@/components/site/SectionHeading";
 import ContactForm from "@/components/site/ContactForm";
 import Reveal from "@/components/site/Reveal";
 import Faq from "@/components/site/Faq";
-import { IMG } from "@/lib/images";
 import { SITE } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -22,23 +20,17 @@ export default function ContactPage() {
 
   return (
     <>
-      <PageHero
-        kicker="Contact"
-        deva="सम्पर्क"
-        title="Come and try a"
-        accent="class, free"
-        body="Tell us a little about yourself and we will suggest a batch and a starting class. Or simply call — we answer between 5 AM and 9 PM."
-        image={IMG.propsFlatlay}
-      />
-
-      <Section>
+      <Section pad={false} className="pt-32 pb-20 lg:pt-40 lg:pb-28">
         <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
           <div>
             <SectionHeading
               align="left"
-              kicker="Reach us"
-              title="The shaala is open"
-              accent="six days a week"
+              level={1}
+              kicker="Contact"
+              deva="सम्पर्क"
+              title="Come and try a"
+              accent="class, free"
+              body="Tell us a little about yourself and we will suggest a batch and a starting class. Or simply call — we answer between 5 AM and 9 PM."
             />
 
             <Reveal delay={0.12}>
