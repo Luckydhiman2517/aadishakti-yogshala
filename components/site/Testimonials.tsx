@@ -88,10 +88,16 @@ export default function Testimonials() {
               onClick={() => setState([i, i > index ? 1 : -1])}
               aria-label={`Testimonial ${i + 1}`}
               aria-current={i === index}
-              className={`h-1.5 rounded-full transition-all duration-500 ${
-                i === index ? "bg-marigold w-8" : "bg-cream/20 hover:bg-cream/40 w-1.5"
-              }`}
-            />
+              className="group grid h-10 place-items-center px-1"
+            >
+              <span
+                className={`h-1.5 rounded-full transition-all duration-500 ${
+                  i === index
+                    ? "bg-marigold w-8"
+                    : "bg-cream/20 group-hover:bg-cream/40 w-1.5"
+                }`}
+              />
+            </button>
           ))}
         </div>
 

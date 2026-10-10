@@ -96,7 +96,7 @@ function ClassCard({
           </span>
           <Link
             href="/schedule"
-            className="text-marigold/80 hover:text-marigold transition-colors"
+            className="text-marigold/80 hover:text-marigold -my-2 py-2 transition-colors"
           >
             Timings
           </Link>

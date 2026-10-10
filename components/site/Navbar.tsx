@@ -30,9 +30,13 @@ export default function Navbar() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? "border-cream/10 bg-night/85 border-b py-2 backdrop-blur-xl"
-            : "border-b border-transparent py-4"
+          open
+            ? // Solid while the drawer is open, so menu items scrolling
+              // underneath never show through behind the logo.
+              "bg-night border-cream/10 border-b py-4"
+            : scrolled
+              ? "border-cream/10 bg-night/85 border-b py-2 backdrop-blur-xl"
+              : "border-b border-transparent py-4"
         }`}
       >
         <nav className="container-x flex items-center justify-between gap-4">
@@ -106,9 +110,12 @@ export default function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="bg-night/95 fixed inset-0 z-40 backdrop-blur-xl lg:hidden"
+            className="bg-night/95 fixed inset-0 z-40 overflow-y-auto overscroll-contain backdrop-blur-xl lg:hidden"
           >
-            <div className="flex h-full flex-col justify-center px-8">
+            {/* min-h-full + justify-center keeps the menu optically centred on
+                tall phones, but lets it grow and scroll on short ones. The top
+                padding always clears the fixed header. */}
+            <div className="flex min-h-full flex-col justify-center px-6 pt-24 pb-10 sm:px-8">
               <ul className="space-y-1">
                 {NAV.map((item, i) => (
                   <motion.li
@@ -120,7 +127,7 @@ export default function Navbar() {
                     <Link
                       href={item.href}
                       onClick={() => setOpen(false)}
-                      className={`font-display block border-b py-3 text-3xl ${
+                      className={`font-display block border-b py-2.5 text-2xl sm:py-3 sm:text-3xl ${
                         pathname === item.href
                           ? "border-marigold/40 text-marigold"
                           : "border-cream/8 text-cream/85"
@@ -135,7 +142,7 @@ export default function Navbar() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.55 }}
-                className="mt-10 space-y-3"
+                className="mt-8 space-y-3 sm:mt-10"
               >
                 <Link
                   href="/contact"

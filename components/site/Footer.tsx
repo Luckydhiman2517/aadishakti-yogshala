@@ -32,7 +32,7 @@ export default function Footer() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="text-cream/60 hover:text-marigold text-sm transition-colors"
+                    className="text-cream/60 hover:text-marigold inline-block py-1 text-sm transition-colors"
                   >
                     {item.label}
                   </Link>
@@ -48,7 +48,7 @@ export default function Footer() {
                 <li key={c.slug}>
                   <Link
                     href={`/classes#${c.slug}`}
-                    className="text-cream/60 hover:text-marigold text-sm transition-colors"
+                    className="text-cream/60 hover:text-marigold inline-block py-1 text-sm transition-colors"
                   >
                     {c.name}
                   </Link>

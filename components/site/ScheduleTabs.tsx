@@ -32,7 +32,8 @@ export default function ScheduleTabs({ showSunday = true }: { showSunday?: boole
     <div>
       {/* Batch switch */}
       <div className="flex justify-center">
-        <div className="glass inline-flex rounded-full p-1.5">
+        {/* Full width on narrow phones so the two pills never run off-screen. */}
+        <div className="glass flex w-full max-w-md rounded-full p-1.5 sm:inline-flex sm:w-auto sm:max-w-none">
           {BATCHES.map((b) => {
             const on = b.id === active;
             return (
@@ -41,7 +42,7 @@ export default function ScheduleTabs({ showSunday = true }: { showSunday?: boole
                 type="button"
                 onClick={() => setActive(b.id)}
                 aria-pressed={on}
-                className={`relative flex items-center gap-2.5 rounded-full px-5 py-3 text-sm transition-colors sm:px-8 ${
+                className={`relative flex flex-1 items-center justify-center gap-2 rounded-full px-3 py-3 text-sm whitespace-nowrap transition-colors sm:flex-none sm:gap-2.5 sm:px-8 ${
                   on ? "text-night" : "text-cream/65 hover:text-cream"
                 }`}
               >
@@ -53,9 +54,9 @@ export default function ScheduleTabs({ showSunday = true }: { showSunday?: boole
                   />
                 )}
                 {b.id === "morning" ? (
-                  <Sunrise className="size-4" />
+                  <Sunrise className="size-4 shrink-0" />
                 ) : (
-                  <Moon className="size-4" />
+                  <Moon className="size-4 shrink-0" />
                 )}
                 <span className="font-medium">{b.name}</span>
                 <span className="hidden text-xs opacity-75 sm:inline">{b.window}</span>
